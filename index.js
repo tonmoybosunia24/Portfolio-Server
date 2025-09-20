@@ -27,7 +27,16 @@ async function run() {
               await client.connect();
 
               // MongoDb DataBase Collection
+              const testimonialsCollection = client.db("Portfolio").collection("testimonials")
               const projectsCollection = client.db("Portfolio").collection("projects")
+
+              // Get The Testimonials
+              app.get('/testimonials', async (req, res) => {
+                     // Find The Testimonials From Database
+                     const testimonials = await testimonialsCollection.find().toArray();
+                     // Send The Data To FrontEnd
+                     res.send(testimonials);
+              })
 
               // Send a ping to confirm a successful connection
               await client.db("admin").command({ ping: 1 });
