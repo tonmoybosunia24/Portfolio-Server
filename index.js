@@ -30,6 +30,13 @@ async function run() {
               const testimonialsCollection = client.db("Portfolio").collection("testimonials")
               const projectsCollection = client.db("Portfolio").collection("projects")
 
+              // Get The Projects
+              app.get('/projects', async (req, res) => {
+                     // Find The Projects From Database
+                     const projects = await projectsCollection.find().toArray();
+                     // Send The Data To FrontEnd
+                     res.send(projects)
+              })
               // Get The Testimonials
               app.get('/testimonials', async (req, res) => {
                      // Find The Testimonials From Database
